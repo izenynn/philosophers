@@ -10,4 +10,111 @@
 #                                                                              #
 # **************************************************************************** #
 
+# **************************************************************************** #
+#                                     VARS                                     #
+# **************************************************************************** #
 
+# COLORS
+NOCOL=\033[0m
+RED=\033[1;31m
+YEL=\033[1;33m
+ORG=\033[0;33m
+GRN=\033[1;32m
+DGRAY=\033[1;30m
+BLU=\033[1;34m
+
+# OS
+UNAME_S := $(shell uname -s)
+
+# **************************************************************************** #
+#                                   PROGRAM                                    #
+# **************************************************************************** #
+
+NAME = philo_bonus
+
+# **************************************************************************** #
+#                                   COMPILER                                   #
+# **************************************************************************** #
+
+MAKE = make
+
+CC = gcc
+
+CFLAGS += -Wall -Wextra -Werror
+#CFLAGS += -pthread
+
+# **************************************************************************** #
+#                                    FLAGS                                     #
+# **************************************************************************** #
+
+CFLAGS += -I ./inc
+
+# **************************************************************************** #
+#                                    PATHS                                     #
+# **************************************************************************** #
+
+SRC_PATH = src
+OBJ_PATH = obj
+INC_PATH = inc
+
+# **************************************************************************** #
+#                                   SOURCES                                    #
+# **************************************************************************** #
+
+SRC_FILES = main.c
+
+SRC = $(addprefix $(SRC_PATH)/, $(SRC_FILES))
+
+OBJ_FILES = $(SRC_FILES:%.c=%.o)
+
+OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_FILES))
+
+# **************************************************************************** #
+#                                    RULES                                     #
+# **************************************************************************** #
+
+.PHONY: all clean fclean re norm
+
+# all
+all: $(NAME)
+
+# name
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS)
+
+# debug
+ifeq ($(UNAME_S),Linux)
+debug: CFLAGS += -pedantic -fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize=bounds -fsanitize=null -g3
+endif
+ifeq ($(UNAME_S),Darwin)
+debug: CFLAGS += -pedantic -fsanitize=address -g3
+endif
+debug: $(NAME)
+
+# objs
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_PATH)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# obj path
+$(OBJ_PATH):
+	mkdir -p $(OBJ_PATH) 2> /dev/null
+
+# clean
+clean:
+	rm -rf $(OBJ_PATH)
+
+# fclean
+fclean: clean
+	rm -rf $(NAME)
+
+# re
+re: fclean all
+
+# norminette
+norm:
+	@printf "\n${GRN}##########${YEL} NORMINETTE ${GRN}##########${NOCOL}\n"
+	@printf "\n${GRN}LIBFT:${BLU}\n\n"
+	@norminette $(LFT_DIR)
+	@printf "\n${GRN}PIPEX:${BLU}\n\n"
+	@norminette $(SRC_PATH)
+	@printf "${NOCOL}"

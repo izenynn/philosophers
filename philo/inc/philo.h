@@ -17,10 +17,19 @@
 # include <stdlib.h>
 # include <stdio.h>
 
+/* message type enum */
+enum e_msg {
+	MSG_FORK = 0,
+	MSG_EAT,
+	MSG_SLP,
+	MSG_THK,
+	MSG_RIP
+};
+
 /* philo struct */
 typedef struct s_philo
 {
-	size_t	test;
+	int	id;
 }	t_philo;
 
 /* philo table struct */
@@ -39,8 +48,12 @@ int		ft_isdigit(int c);
 size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *str);
+int		ft_putnbr_fd(int n, int fd);
 
 /* handle_args.c */
 int		handle_args(int argc, char *argv[], t_table *tab);
+
+/* print_msg.c */
+void	print_msg(t_philo *philo, int msg);
 
 #endif

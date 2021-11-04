@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include <philo.h>
 
 int	ft_isdigit(int c)
 {
@@ -67,4 +67,30 @@ int	ft_atoi(const char *str)
 			return (0);
 	}
 	return (result * sign);
+}
+
+int	ft_putnbr_fd(int n, int fd)
+{
+	int					cnt;
+	short				sign;
+	unsigned int		pow_ten;
+	char				c;
+
+	cnt = 0;
+	pow_ten = 1;
+	sign = 0;
+	if (n < 0 && ++sign)
+		n = -n;
+	while (n / pow_ten / 10)
+		pow_ten *= 10;
+	if (sign)
+		cnt += write(fd, "-", 1);
+	while (pow_ten)
+	{
+		c = n / pow_ten + '0';
+		cnt += write(fd, &c, 1);
+		n %= pow_ten;
+		pow_ten /= 10;
+	}
+	return (cnt);
 }

@@ -71,6 +71,8 @@ static int	check_args(int argc, char *argv[])
 
 static void	parse_args(int argc, char *argv[], t_table *tab)
 {
+	int	i;
+
 	tab->n_philo = ft_atoi(argv[1]);
 	tab->t_die = ft_atoi(argv[2]);
 	tab->t_eat = ft_atoi(argv[3]);
@@ -79,6 +81,9 @@ static void	parse_args(int argc, char *argv[], t_table *tab)
 	if (argc == 6)
 		tab->tn_eat = ft_atoi(argv[5]);
 	tab->philos = (t_philo *)malloc(tab->n_philo * sizeof(t_philo));
+	i = -1;
+	while (++i < tab->n_philo)
+		tab->philos[i].id = i;
 }
 
 int	handle_args(int argc, char *argv[], t_table *tab)

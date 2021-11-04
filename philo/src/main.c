@@ -37,6 +37,9 @@ int	main(int argc, char *argv[])
 	for (int i = 0; i < tab.n_philo; i++) {
 		pthread_create(&tid[i], NULL, &philo_life, &tab.philos[i]);
 	}
+	for (int i = 0; i < tab.n_philo; i++) {
+		pthread_join(tid[i], NULL);
+	}
 	//
 	free(tid);
 	free(tab.philos);

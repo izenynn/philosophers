@@ -10,8 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <philo_bonus.h>
+
 int	main(int argc, char *argv[])
 {
-	return (0);
+	printf("Philo... :D");
+	return (EXIT_SUCCESS);
 }
-

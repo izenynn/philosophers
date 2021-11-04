@@ -10,8 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(int argc, char *argv[])
+#include <philo.h>
+
+void	usage()
 {
-	return (0);
+	printf("Error: invalid arguments\n");
+	printf("Usage: ./philo [N PHILO] [DIE TIME] [EAT TIME] [SLEEP TIME] (opt)[PHILO EAT N TIMES]\n");
+	exit(EXIT_FAILURE);
 }
 
+int	main(int argc, char *argv[])
+{
+	if (argc < 5 || argc > 6)
+		usage();
+	for (int i = 0; i < argc; i++)
+		printf("arg %2d: %s\n", i, argv[i]);
+	return (EXIT_SUCCESS);
+}

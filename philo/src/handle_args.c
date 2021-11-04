@@ -83,7 +83,18 @@ static void	parse_args(int argc, char *argv[], t_table *tab)
 	tab->philos = (t_philo *)malloc(tab->n_philo * sizeof(t_philo));
 	i = -1;
 	while (++i < tab->n_philo)
-		tab->philos[i].id = i;
+	{
+		tab->philos[i].id = i + 1;
+		if (i + 1 == tab->n_philo)
+			tab->philos[i].r_philo = &tab->philos[0];
+		else
+			tab->philos[i].r_philo = &tab->philos[i + 1];
+		if (i == 0)
+			tab->philos[i].l_philo = &tab->philos[tab->n_philo - 1];
+		else
+			tab->philos[i].l_philo = &tab->philos[i - 1];
+		pthread_mutex_init(&tab->philos[i].chopstick, NULL);
+	}
 }
 
 int	handle_args(int argc, char *argv[], t_table *tab)

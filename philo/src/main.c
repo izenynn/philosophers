@@ -20,38 +20,25 @@ void	usage(void)
 	exit(EXIT_FAILURE);
 }
 
-pthread_t tid[100];
-pthread_mutex_t lock;
-
-void	*test(void *arg)
-{
-	t_philo	*philo = (t_philo *)arg;
-
-	pthread_mutex_lock(&lock);
-
-	printf("philo %d started\n", philo->id);
-
-	pthread_mutex_unlock(&lock);
-
-	return (NULL);
-}
-
+/* main */
 int	main(int argc, char *argv[])
 {
-	t_table	tab;
+	t_table		tab;
+	pthread_t	*tid;
 
 	if ((argc < 5 || argc > 6) || handle_args(argc, argv, &tab))
 		usage();
+	tid = (pthread_t *)malloc(tab.n_philo * sizeof(pthread_t));
 	// TEST CODE
 	printf("nphilos: %d\n", tab.n_philo);
 	for (int i = 0; i < tab.n_philo; i++)
 		;//print_msg(&tab.philos[i], MSG_RIP);
 	//
-	pthread_mutex_init(&lock, NULL);
 	for (int i = 0; i < tab.n_philo; i++) {
-		pthread_create(&tid[i], NULL, &test, &tab.philos[i]);
+		pthread_create(&tid[i], NULL, &philo_life, &tab.philos[i]);
 	}
 	//
+	free(tid);
 	free(tab.philos);
 	return (EXIT_SUCCESS);
 }

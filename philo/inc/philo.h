@@ -30,7 +30,10 @@ enum e_msg {
 /* philo struct */
 typedef struct s_philo
 {
-	int	id;
+	int				id;
+	pthread_mutex_t	chopstick;
+	struct s_philo	*r_philo;
+	struct s_philo	*l_philo;
 }	t_philo;
 
 /* philo table struct */
@@ -56,5 +59,8 @@ int		handle_args(int argc, char *argv[], t_table *tab);
 
 /* print_msg.c */
 void	print_msg(t_philo *philo, int msg);
+
+/* philo_life.c */
+void	*philo_life(void *arg);
 
 #endif

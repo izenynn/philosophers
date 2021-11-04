@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <pthread.h>
 
 /* message type enum */
 enum e_msg {

@@ -61,7 +61,7 @@ INC_PATH = inc
 #                                   SOURCES                                    #
 # **************************************************************************** #
 
-SRC_FILES = main.c
+SRC_FILES =	main.c	handle_args.c	utils.c
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_FILES))
 

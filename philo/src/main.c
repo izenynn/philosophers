@@ -14,16 +14,18 @@
 
 void	usage()
 {
-	printf("Error: invalid arguments\n");
-	printf("Usage: ./philo [N PHILO] [DIE TIME] [EAT TIME] [SLEEP TIME] (opt)[PHILO EAT N TIMES]\n");
+	write(STDERR_FILENO, "Error: invalid arguments\n", 25);
+	write(STDERR_FILENO, "Usage: ./philo [N PHILO] [DIE TIME] [EAT TIME]", 46);
+	write(STDERR_FILENO, " [SLEEP TIME] (opt)[PHILO EAT N TIMES]\n", 39);
 	exit(EXIT_FAILURE);
 }
 
 int	main(int argc, char *argv[])
 {
-	if (argc < 5 || argc > 6)
+	t_table tab;
+
+	if ((argc < 5 || argc > 6) || handle_args(argc, argv, &tab))
 		usage();
-	for (int i = 0; i < argc; i++)
-		printf("arg %2d: %s\n", i, argv[i]);
+	free(tab.philos);
 	return (EXIT_SUCCESS);
 }

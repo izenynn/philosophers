@@ -41,6 +41,7 @@ int	main(int argc, char *argv[])
 		pthread_join(tid[i], NULL);
 	}
 	//
+	// TODO mutex destroy... ?
 	free(tid);
 	free(tab.philos);
 	return (EXIT_SUCCESS);

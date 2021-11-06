@@ -18,6 +18,14 @@
 # include <stdio.h>
 # include <pthread.h>
 
+# define NOCOL "\033[0m"
+# define RED "\033[1;31m"
+# define YEL "\033[1;33m"
+# define ORG "\033[0;33m"
+# define GRN "\033[1;32m"
+# define DGRAY "\033[1;30m"
+# define BLU "\033[1;34m"
+
 /* message type enum */
 enum e_msg {
 	MSG_FORK = 0,
@@ -31,9 +39,11 @@ enum e_msg {
 typedef struct s_philo
 {
 	int				id;
-	pthread_mutex_t	chopstick;
+	int				eat_cnt;
+	pthread_mutex_t	fork;
 	struct s_philo	*r_philo;
 	struct s_philo	*l_philo;
+	struct s_table	*table;
 }	t_philo;
 
 /* philo table struct */

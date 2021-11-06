@@ -85,6 +85,7 @@ static void	parse_args(int argc, char *argv[], t_table *tab)
 	while (++i < tab->n_philo)
 	{
 		tab->philos[i].id = i + 1;
+		tab->philos[i].table = tab;
 		if (i + 1 == tab->n_philo)
 			tab->philos[i].r_philo = &tab->philos[0];
 		else
@@ -93,7 +94,7 @@ static void	parse_args(int argc, char *argv[], t_table *tab)
 			tab->philos[i].l_philo = &tab->philos[tab->n_philo - 1];
 		else
 			tab->philos[i].l_philo = &tab->philos[i - 1];
-		pthread_mutex_init(&tab->philos[i].chopstick, NULL);
+		pthread_mutex_init(&tab->philos[i].fork, NULL);
 	}
 }
 

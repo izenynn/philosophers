@@ -19,15 +19,28 @@ void	*philo_life(void *arg)
 	if (philo->id % 2 == 0)
 		usleep(10000);
 
-	pthread_mutex_lock(&philo->chopstick);
-	pthread_mutex_lock(&philo->r_philo->chopstick);
+	while (1)
+	{
+		if (philo->eat_cnt >= philo->table->tn_eat)
+			break ;
+		pthread_mutex_lock(&philo->fork);
+		print_msg(philo, MSG_FORK);
 
-	print_msg(philo, MSG_FORK);
-	usleep(500000);
-	print_msg(philo, MSG_RIP);
+		pthread_mutex_lock(&philo->r_philo->fork);
+		print_msg(philo, MSG_FORK);
 
-	pthread_mutex_unlock(&philo->chopstick);
-	pthread_mutex_unlock(&philo->r_philo->chopstick);
+		usleep(500000);
+		print_msg(philo, MSG_EAT);
+
+		pthread_mutex_unlock(&philo->fork);
+		pthread_mutex_unlock(&philo->r_philo->fork);
+
+		philo->eat_cnt++;
+
+		// sleep
+		usleep(1000000);
+
+	}
 
 	(void)philo;
 	return (NULL);

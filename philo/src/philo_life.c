@@ -21,7 +21,7 @@ void	*philo_life(void *arg)
 
 	while (1)
 	{
-		if (philo->eat_cnt >= philo->table->tn_eat)
+		if (philo->table->tn_eat != -1 && philo->eat_cnt >= philo->table->tn_eat)
 		{
 			print_msg(philo, MSG_RIP);
 			break ;

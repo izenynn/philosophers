@@ -29,7 +29,8 @@ static char	*get_msg(int msg)
 
 void	print_msg(t_philo *philo, int msg)
 {
-	ft_putnbr_fd(philo->id, STDOUT_FILENO);
+	printf("%3d %s", philo->id, get_msg(msg));
+	/*ft_putnbr_fd(philo->id, STDOUT_FILENO);
 	write(STDOUT_FILENO, "\t", 1);
-	write(STDOUT_FILENO, get_msg(msg), ft_strlen(get_msg(msg)));
+	write(STDOUT_FILENO, get_msg(msg), ft_strlen(get_msg(msg)));*/
 }

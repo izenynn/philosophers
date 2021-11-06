@@ -22,9 +22,9 @@ void	*philo_life(void *arg)
 	pthread_mutex_lock(&philo->chopstick);
 	pthread_mutex_lock(&philo->r_philo->chopstick);
 
-	printf("philo %d started\n", philo->id);
+	print_msg(philo, MSG_FORK);
 	usleep(500000);
-	printf("end!\n");
+	print_msg(philo, MSG_RIP);
 
 	pthread_mutex_unlock(&philo->chopstick);
 	pthread_mutex_unlock(&philo->r_philo->chopstick);

@@ -86,6 +86,8 @@ static void	parse_args(int argc, char *argv[], t_table *tab)
 	{
 		tab->philos[i].id = i + 1;
 		tab->philos[i].table = tab;
+		// TODO calloc will make unnecesary this line
+		tab->philos[i].eat_cnt = 0;
 		if (i + 1 == tab->n_philo)
 			tab->philos[i].r_philo = &tab->philos[0];
 		else

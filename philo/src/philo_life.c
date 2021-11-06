@@ -22,7 +22,10 @@ void	*philo_life(void *arg)
 	while (1)
 	{
 		if (philo->eat_cnt >= philo->table->tn_eat)
+		{
+			print_msg(philo, MSG_RIP);
 			break ;
+		}
 		pthread_mutex_lock(&philo->fork);
 		print_msg(philo, MSG_FORK);
 
@@ -37,8 +40,12 @@ void	*philo_life(void *arg)
 
 		philo->eat_cnt++;
 
-		// sleep
-		usleep(1000000);
+		/* sleep */
+		print_msg(philo, MSG_SLP);
+		usleep(philo->table->t_slp * 1000);
+
+		/* think */
+		print_msg(philo, MSG_THK);
 
 	}
 

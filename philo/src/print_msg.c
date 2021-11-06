@@ -15,13 +15,13 @@
 static char	*get_clr(int msg)
 {
 	if (msg == MSG_FORK)
-		return (ORG);
+		return (YEL);
 	if (msg == MSG_EAT)
 		return (GRN);
 	if (msg == MSG_SLP)
-		return (DGRAY);
-	if (msg == MSG_THK)
 		return (BLU);
+	if (msg == MSG_THK)
+		return (CIA);
 	if (msg == MSG_RIP)
 		return (RED);
 	return ("Error: not valid msg id\n");

@@ -102,6 +102,7 @@ static void	parse_args(int argc, char *argv[], t_table *tab)
 			tab->philos[i].l_philo = &tab->philos[i - 1];
 		pthread_mutex_init(&tab->philos[i].fork, NULL);
 	}
+	pthread_mutex_init(&tab->print, NULL);
 }
 
 int	handle_args(int argc, char *argv[], t_table *tab)

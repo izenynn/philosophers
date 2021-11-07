@@ -53,15 +53,16 @@ typedef struct s_philo
 /* philo table struct */
 typedef struct s_table
 {
-	int		t_die;
-	int		t_eat;
-	int		t_slp;
-	int		n_eat;
-	int		n_philos;
-	int		eaten_all;
-	int		dead;
-	size_t	t_init;
-	t_philo	*philos;
+	int				t_die;
+	int				t_eat;
+	int				t_slp;
+	int				n_eat;
+	int				n_philos;
+	int				eaten_all;
+	int				dead;
+	size_t			t_init;
+	t_philo			*philos;
+	pthread_mutex_t	print;
 }	t_table;
 
 /* utils.c */

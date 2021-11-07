@@ -12,6 +12,7 @@
 
 #include <philo.h>
 
+/* get message color */
 static char	*get_clr(int msg)
 {
 	if (msg == MSG_FORK)
@@ -24,11 +25,10 @@ static char	*get_clr(int msg)
 		return (CIA);
 	if (msg == MSG_RIP)
 		return (RED);
-	return ("Error: not valid msg id\n");
+	return ("Error: not valid msg id");
 }
 
-	
-
+/* get message string */
 static char	*get_msg(int msg)
 {
 	if (msg == MSG_FORK)
@@ -44,18 +44,25 @@ static char	*get_msg(int msg)
 	return ("Error: not valid msg id");
 }
 
+/* print philo status messages */
 void	print_msg(t_philo *philo, int msg)
 {
 	size_t	t;
 
+	/* get time stamp in ms */
 	t = get_time() - philo->tab->t_init;
-	if (msg == MSG_EAT)
-		printf("%s%5ld ms %s%3d %s%s #%d %s\n", DGRAY, t,
-			MGN, philo->id, get_clr(msg), get_msg(msg), philo->eat_cnt, NOCOL);
-	else
-		printf("%s%5ld ms %s%3d %s%s%s\n", DGRAY, t,
-			MGN, philo->id, get_clr(msg), get_msg(msg), NOCOL);
-	/*ft_putnbr_fd(philo->id, STDOUT_FILENO);
-	write(STDOUT_FILENO, "\t", 1);
-	write(STDOUT_FILENO, get_msg(msg), ft_strlen(get_msg(msg)));*/
+	/* block mutex for print */
+	pthread_mutex_lock(&philo->tab->print);
+	/* print status message */
+	if (!philo->tab->dead)
+	{
+		if (msg == MSG_EAT)
+			printf("%s%5ld ms %s%3d %s%s #%d %s\n", DGRAY, t,
+				MGN, philo->id, get_clr(msg), get_msg(msg), philo->eat_cnt, NOCOL);
+		else
+			printf("%s%5ld ms %s%3d %s%s%s\n", DGRAY, t,
+				MGN, philo->id, get_clr(msg), get_msg(msg), NOCOL);
+	}
+	/* unlock mutex */
+	pthread_mutex_unlock(&philo->tab->print);
 }

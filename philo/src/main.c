@@ -12,6 +12,7 @@
 
 #include <philo.h>
 
+/* print program usage */
 void	usage(void)
 {
 	write(STDERR_FILENO, "Error: invalid arguments (must be integers)\n", 44);
@@ -37,11 +38,7 @@ int	main(int argc, char *argv[])
 		/* set last eat time to init */
 		tab.philos[i].last_eat = tab.t_init;
 	}
-	/*for (int i = 0; i < tab.n_philos; i++) {
-		pthread_join(tid[i], NULL);
-	}*/
 	//
-	// TODO mutex destroy... ?
 	check_dead(&tab);
 	exit_philo(&tab, tid);
 	return (EXIT_SUCCESS);

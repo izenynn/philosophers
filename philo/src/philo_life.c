@@ -48,6 +48,15 @@ static void	philo_eat(t_philo *philo)
 	/* take fork #1 */
 	pthread_mutex_lock(&philo->fork);
 	print_msg(philo, MSG_FORK);
+	/* check for dead */
+	if (philo->tab->n_philos == 1)
+	{
+		hypnos(tab, tab->t_die);
+		print_msg(philo, MSG_RIP);
+		pthread_mutex_unlock(&philo->fork);
+		tab->dead = 1;
+		return;
+	}
 	/* take fork #2 */
 	pthread_mutex_lock(&philo->r_philo->fork);
 	print_msg(philo, MSG_FORK);

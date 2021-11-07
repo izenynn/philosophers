@@ -63,6 +63,7 @@ typedef struct s_table
 	size_t			t_init;
 	t_philo			*philos;
 	pthread_mutex_t	print;
+	pthread_mutex_t	check;
 }	t_table;
 
 /* utils.c */

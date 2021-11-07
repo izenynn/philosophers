@@ -36,7 +36,9 @@ int	main(int argc, char *argv[])
 	for (int i = 0; i < tab.n_philos; i++) {
 		pthread_create(&tid[i], NULL, &philo_life, &tab.philos[i]);
 		/* set last eat time to init */
+		pthread_mutex_lock(&tab.check);
 		tab.philos[i].last_eat = tab.t_init;
+		pthread_mutex_unlock(&tab.check);
 	}
 	//
 	check_dead(&tab);

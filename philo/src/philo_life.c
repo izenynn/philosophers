@@ -21,11 +21,13 @@ void	check_dead(t_table *tab)
 		i = -1;
 		while (!tab->dead && ++i < tab->n_philos)
 		{
+			pthread_mutex_lock(&tab->check);
 			if (get_time() - tab->philos[i].last_eat > (size_t)tab->t_die)
 			{
 				print_msg(&tab->philos[i], MSG_RIP);
 				tab->dead = 1;
 			}
+			pthread_mutex_unlock(&tab->check);
 			/* wait a little to make sure msgs are printed */
 			usleep(100);
 		}
@@ -63,7 +65,9 @@ static void	philo_eat(t_philo *philo)
 	/* eat */
 	print_msg(philo, MSG_EAT);
 	/* update last eat */
+	pthread_mutex_lock(&tab->check);
 	philo->last_eat = get_time();
+	pthread_mutex_unlock(&tab->check);
 	/* eating... */
 	hypnos(tab, tab->t_eat);
 	/* update total eats */

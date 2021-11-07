@@ -73,6 +73,10 @@ static void	parse_args(int argc, char *argv[], t_table *tab)
 {
 	int	i;
 
+	// TODO calloc will make unnecesary this line
+	tab->dead = 0;
+	tab->eat_cnt_all = 0;
+	//
 	tab->n_philo = ft_atoi(argv[1]);
 	tab->t_die = ft_atoi(argv[2]);
 	tab->t_eat = ft_atoi(argv[3]);
@@ -85,7 +89,7 @@ static void	parse_args(int argc, char *argv[], t_table *tab)
 	while (++i < tab->n_philo)
 	{
 		tab->philos[i].id = i + 1;
-		tab->philos[i].table = tab;
+		tab->philos[i].tab = tab;
 		// TODO calloc will make unnecesary this line
 		tab->philos[i].eat_cnt = 0;
 		if (i + 1 == tab->n_philo)

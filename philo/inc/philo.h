@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 # define NOCOL "\033[0m"
 # define RED "\033[1;31m"
@@ -41,10 +42,11 @@ typedef struct s_philo
 {
 	int				id;
 	int				eat_cnt;
+	size_t			last_eat;
 	pthread_mutex_t	fork;
 	struct s_philo	*r_philo;
 	struct s_philo	*l_philo;
-	struct s_table	*table;
+	struct s_table	*tab;
 }	t_philo;
 
 /* philo table struct */
@@ -55,6 +57,8 @@ typedef struct s_table
 	int		t_slp;
 	int		tn_eat;
 	int		n_philo;
+	int		dead;
+	int		eat_cnt_all;
 	t_philo	*philos;
 }	t_table;
 

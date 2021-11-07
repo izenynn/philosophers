@@ -50,10 +50,10 @@ void	print_msg(t_philo *philo, int msg)
 
 	t = get_time() - philo->tab->t_init;
 	if (msg == MSG_EAT)
-		printf("%s%-5ld %s%-3d %s%s #%-3d %s\n", BLU, t,
+		printf("%s%5ld ms %s%3d %s%s #%d %s\n", DGRAY, t,
 			MGN, philo->id, get_clr(msg), get_msg(msg), philo->eat_cnt, NOCOL);
 	else
-		printf("%s%-5ld %s%-3d %s%s%s\n", BLU, t,
+		printf("%s%5ld ms %s%3d %s%s%s\n", DGRAY, t,
 			MGN, philo->id, get_clr(msg), get_msg(msg), NOCOL);
 	/*ft_putnbr_fd(philo->id, STDOUT_FILENO);
 	write(STDOUT_FILENO, "\t", 1);

@@ -41,7 +41,7 @@ MAKE = make
 CC = gcc
 
 CFLAGS += -Wall -Wextra -Werror
-#CFLAGS += -pthread
+CFLAGS += -pthread
 
 # **************************************************************************** #
 #                                    FLAGS                                     #
@@ -62,7 +62,7 @@ INC_PATH = inc
 # **************************************************************************** #
 
 SRC_FILES =	main.c			handle_args.c			utils.c			\
-			print_msg.c		philo_life.c
+			print_msg.c		philo_life.c			philo_utils.c
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_FILES))
 
@@ -91,6 +91,10 @@ ifeq ($(UNAME_S),Darwin)
 debug: CFLAGS += -pedantic -fsanitize=address -g3
 endif
 debug: $(NAME)
+
+# threads
+threads: CFLAGS += -fsanitize=thread -g3
+threads: $(NAME)
 
 # objs
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_PATH)

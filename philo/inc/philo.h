@@ -27,6 +27,7 @@
 # define CIA "\033[1;36m"
 # define DGRAY "\033[1;30m"
 # define BLU "\033[1;34m"
+# define MGN "\033[1;35m"
 
 /* message type enum */
 enum e_msg {
@@ -55,10 +56,11 @@ typedef struct s_table
 	int		t_die;
 	int		t_eat;
 	int		t_slp;
-	int		tn_eat;
-	int		n_philo;
+	int		n_eat;
+	int		n_philos;
+	int		eaten_all;
 	int		dead;
-	int		eat_cnt_all;
+	size_t	t_init;
 	t_philo	*philos;
 }	t_table;
 
@@ -77,5 +79,11 @@ void	print_msg(t_philo *philo, int msg);
 
 /* philo_life.c */
 void	*philo_life(void *arg);
+void	check_dead(t_table *tab);
+
+/* philo_utils.c */
+void	exit_philo(t_table *tab, pthread_t *tid);
+size_t	get_time();
+void	hypnos(t_table *tab, size_t t_slp);
 
 #endif

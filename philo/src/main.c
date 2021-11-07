@@ -28,21 +28,21 @@ int	main(int argc, char *argv[])
 
 	if ((argc < 5 || argc > 6) || handle_args(argc, argv, &tab))
 		usage();
-	tid = (pthread_t *)malloc(tab.n_philo * sizeof(pthread_t));
-	// TEST CODE
-	printf("nphilos: %d\n", tab.n_philo);
-	for (int i = 0; i < tab.n_philo; i++)
-		;//print_msg(&tab.philos[i], MSG_RIP);
-	//
-	for (int i = 0; i < tab.n_philo; i++) {
+	tid = (pthread_t *)malloc(tab.n_philos * sizeof(pthread_t));
+	/* get init time */
+	tab.t_init = get_time();
+	/* create threads */
+	for (int i = 0; i < tab.n_philos; i++) {
 		pthread_create(&tid[i], NULL, &philo_life, &tab.philos[i]);
+		/* set last eat time to init */
+		tab.philos[i].last_eat = tab.t_init;
 	}
-	for (int i = 0; i < tab.n_philo; i++) {
+	/*for (int i = 0; i < tab.n_philos; i++) {
 		pthread_join(tid[i], NULL);
-	}
+	}*/
 	//
 	// TODO mutex destroy... ?
-	free(tid);
-	free(tab.philos);
+	check_dead(&tab);
+	exit_philo(&tab, tid);
 	return (EXIT_SUCCESS);
 }

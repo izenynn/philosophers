@@ -12,14 +12,43 @@
 
 #include <philo.h>
 
-void	philo_eat(t_philo *philo)
+void	check_dead(t_table *tab)
+{
+	int	i;
+
+	while (!tab->eaten_all)
+	{
+		i = -1;
+		while (!tab->dead && ++i < tab->n_philos)
+		{
+			if (get_time() - tab->philos[i].last_eat > (size_t)tab->t_die)
+			{
+				print_msg(&tab->philos[i], MSG_RIP);
+				tab->dead = 1;
+			}
+			/* wait a little to make sure msgs are printed */
+			usleep(100);
+		}
+		if (tab->dead)
+			break ;
+		i = 0;
+		while (tab->n_eat != -1 && i < tab->n_philos
+			&& tab->philos[i].eat_cnt >= tab->n_eat)
+			i++;
+		if (i == tab->n_philos)
+			tab->eaten_all = 1;
+	}
+}
+
+static void	philo_eat(t_philo *philo)
 {
 	t_table	*tab;
 
 	tab = philo->tab;
-	/* take forks */
+	/* take fork #1 */
 	pthread_mutex_lock(&philo->fork);
 	print_msg(philo, MSG_FORK);
+	/* take fork #2 */
 	pthread_mutex_lock(&philo->r_philo->fork);
 	print_msg(philo, MSG_FORK);
 	/* eat */
@@ -27,7 +56,7 @@ void	philo_eat(t_philo *philo)
 	/* update last eat */
 	philo->last_eat = get_time();
 	/* eating... */
-	hypnos();
+	hypnos(tab, tab->t_eat);
 	/* update total eats */
 	philo->eat_cnt++;
 	/* release fork */
@@ -40,25 +69,26 @@ void	*philo_life(void *arg)
 	t_philo	*philo = (t_philo *)arg;
 	t_table	*tab = philo->tab;
 
+	/* prevent all philosophers of taking a fork */
 	if (philo->id % 2 == 0)
-		usleep(10000);
+		usleep(100);
 
+	/* philosophers life cicle \(^^)/ */
 	while (!tab->dead)
 	{
 		/* eat */
 		philo_eat(philo);
 		/* check if all have ate n meals */
-		if (tab->eat_cnt_all)
+		if (tab->eaten_all)
 			break ;
 		/* sleep */
 		print_msg(philo, MSG_SLP);
-		usleep(philo->tab->t_slp * 1000);
+		hypnos(tab, tab->t_slp);
 
 		/* think */
 		print_msg(philo, MSG_THK);
 
 	}
 
-	(void)philo;
 	return (NULL);
 }

@@ -1,5 +1,19 @@
 #include <philo.h>
 
+void	exit_philo(t_table *tab, pthread_t *tid)
+{
+	int	i;
+
+	i = -1;
+	while (++i < tab->n_philos)
+		pthread_join(tid[i], NULL);
+	i = -1;
+	while (++i < tab->n_philos)
+		pthread_mutex_destroy(&tab->philos[i].fork);
+	free(tab->philos);
+	free(tid);
+}
+
 size_t	get_time()
 {
 	struct timeval	t;
@@ -12,10 +26,12 @@ void	hypnos(t_table *tab, size_t t_slp)
 {
 	size_t	t;
 
-	i = get_time();
+	t = get_time();
 	while (!(tab->dead))
 	{
 		if (get_time() - t >= t_slp)
 			break ;
+		usleep(10);
 	}
 }
+

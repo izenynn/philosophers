@@ -75,29 +75,29 @@ static void	parse_args(int argc, char *argv[], t_table *tab)
 
 	// TODO calloc will make unnecesary this line
 	tab->dead = 0;
-	tab->eat_cnt_all = 0;
+	tab->eaten_all = 0;
 	//
-	tab->n_philo = ft_atoi(argv[1]);
+	tab->n_philos = ft_atoi(argv[1]);
 	tab->t_die = ft_atoi(argv[2]);
 	tab->t_eat = ft_atoi(argv[3]);
 	tab->t_slp = ft_atoi(argv[4]);
-	tab->tn_eat = -1;
+	tab->n_eat = -1;
 	if (argc == 6)
-		tab->tn_eat = ft_atoi(argv[5]);
-	tab->philos = (t_philo *)malloc(tab->n_philo * sizeof(t_philo));
+		tab->n_eat = ft_atoi(argv[5]);
+	tab->philos = (t_philo *)malloc(tab->n_philos * sizeof(t_philo));
 	i = -1;
-	while (++i < tab->n_philo)
+	while (++i < tab->n_philos)
 	{
 		tab->philos[i].id = i + 1;
 		tab->philos[i].tab = tab;
 		// TODO calloc will make unnecesary this line
 		tab->philos[i].eat_cnt = 0;
-		if (i + 1 == tab->n_philo)
+		if (i + 1 == tab->n_philos)
 			tab->philos[i].r_philo = &tab->philos[0];
 		else
 			tab->philos[i].r_philo = &tab->philos[i + 1];
 		if (i == 0)
-			tab->philos[i].l_philo = &tab->philos[tab->n_philo - 1];
+			tab->philos[i].l_philo = &tab->philos[tab->n_philos - 1];
 		else
 			tab->philos[i].l_philo = &tab->philos[i - 1];
 		pthread_mutex_init(&tab->philos[i].fork, NULL);

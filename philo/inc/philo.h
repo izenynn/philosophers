@@ -25,7 +25,7 @@
 # define ORG "\033[0;33m"
 # define GRN "\033[1;32m"
 # define CIA "\033[1;36m"
-# define DGRAY "\033[1;37m"
+# define DGRAY "\033[1;90m"
 # define BLU "\033[1;34m"
 # define MGN "\033[1;35m"
 

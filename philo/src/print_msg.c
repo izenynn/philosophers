@@ -32,15 +32,15 @@ static char	*get_clr(int msg)
 static char	*get_msg(int msg)
 {
 	if (msg == MSG_FORK)
-		return ("has taken a fork");
+		return ("(-.-) has taken a fork");
 	if (msg == MSG_EAT)
-		return ("is eating");
+		return ("(^o^) is eating");
 	if (msg == MSG_SLP)
-		return ("is sleeping");
+		return ("(u.u) is sleeping");
 	if (msg == MSG_THK)
-		return ("is thinking");
+		return ("(7.7) is thinking");
 	if (msg == MSG_RIP)
-		return ("R.I.P.");
+		return ("(x.x) R.I.P.");
 	return ("Error: not valid msg id");
 }
 

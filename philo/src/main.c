@@ -24,23 +24,26 @@ void	usage(void)
 /* main */
 int	main(int argc, char *argv[])
 {
+	int			i;
 	t_table		tab;
 	pthread_t	*tid;
 
 	if ((argc < 5 || argc > 6) || handle_args(argc, argv, &tab))
 		usage();
 	tid = (pthread_t *)malloc(tab.n_philos * sizeof(pthread_t));
-	/* get init time */
 	tab.t_init = get_time();
-	/* create threads */
-	for (int i = 0; i < tab.n_philos; i++) {
-		pthread_create(&tid[i], NULL, &philo_life, &tab.philos[i]);
-		/* set last eat time to init */
+	i = -1;
+	while (++i < tab.n_philos)
+	{
+		if (pthread_create(&tid[i], NULL, &philo_life, &tab.philos[i]))
+		{
+			write(STDERR_FILENO, "Error: cannot create thread\n", 28);
+			break ;
+		}
 		pthread_mutex_lock(&tab.check);
 		tab.philos[i].last_eat = tab.t_init;
 		pthread_mutex_unlock(&tab.check);
 	}
-	//
 	check_dead(&tab);
 	exit_philo(&tab, tid);
 	return (EXIT_SUCCESS);

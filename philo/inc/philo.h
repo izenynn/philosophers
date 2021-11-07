@@ -85,7 +85,7 @@ void	check_dead(t_table *tab);
 
 /* philo_utils.c */
 void	exit_philo(t_table *tab, pthread_t *tid);
-size_t	get_time();
+size_t	get_time(void);
 void	hypnos(t_table *tab, size_t t_slp);
 
 #endif

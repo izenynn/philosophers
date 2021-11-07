@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/08 00:42:06 by dpoveda-          #+#    #+#             */
+/*   Updated: 2021/11/08 00:42:07 by dpoveda-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <philo.h>
 
 /* on exit */
@@ -17,7 +29,7 @@ void	exit_philo(t_table *tab, pthread_t *tid)
 }
 
 /* get current time */
-size_t	get_time()
+size_t	get_time(void)
 {
 	struct timeval	t;
 
@@ -38,4 +50,3 @@ void	hypnos(t_table *tab, size_t t_slp)
 		usleep(10);
 	}
 }
-

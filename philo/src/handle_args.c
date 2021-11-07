@@ -12,6 +12,7 @@
 
 #include <philo.h>
 
+/* check arguments are numbers */
 static int	check_nbrs_valid(int argc, char *argv[])
 {
 	int	i;
@@ -36,6 +37,7 @@ static int	check_nbrs_valid(int argc, char *argv[])
 	return (0);
 }
 
+/* check argument is an int */
 static int	check_is_int(char *s)
 {
 	size_t	len;
@@ -54,6 +56,7 @@ static int	check_is_int(char *s)
 	return (0);
 }
 
+/* check arguments */
 static int	check_args(int argc, char *argv[])
 {
 	int	i;
@@ -69,28 +72,19 @@ static int	check_args(int argc, char *argv[])
 	return (0);
 }
 
-static void	parse_args(int argc, char *argv[], t_table *tab)
+/* initialise tab */
+static void	initialise_tab(int argc, char *argv[], t_table *tab)
 {
 	int	i;
 
-	// TODO calloc will make unnecesary this line
 	tab->dead = 0;
 	tab->eaten_all = 0;
-	//
-	tab->n_philos = ft_atoi(argv[1]);
-	tab->t_die = ft_atoi(argv[2]);
-	tab->t_eat = ft_atoi(argv[3]);
-	tab->t_slp = ft_atoi(argv[4]);
-	tab->n_eat = -1;
-	if (argc == 6)
-		tab->n_eat = ft_atoi(argv[5]);
 	tab->philos = (t_philo *)malloc(tab->n_philos * sizeof(t_philo));
 	i = -1;
 	while (++i < tab->n_philos)
 	{
 		tab->philos[i].id = i + 1;
 		tab->philos[i].tab = tab;
-		// TODO calloc will make unnecesary this line
 		tab->philos[i].eat_cnt = 0;
 		if (i + 1 == tab->n_philos)
 			tab->philos[i].r_philo = &tab->philos[0];
@@ -106,10 +100,18 @@ static void	parse_args(int argc, char *argv[], t_table *tab)
 	pthread_mutex_init(&tab->check, NULL);
 }
 
+/* handle check, parse and initialise tab */
 int	handle_args(int argc, char *argv[], t_table *tab)
 {
 	if (check_args(argc, argv))
 		return (1);
-	parse_args(argc, argv, tab);
+	tab->n_philos = ft_atoi(argv[1]);
+	tab->t_die = ft_atoi(argv[2]);
+	tab->t_eat = ft_atoi(argv[3]);
+	tab->t_slp = ft_atoi(argv[4]);
+	tab->n_eat = -1;
+	if (argc == 6)
+		tab->n_eat = ft_atoi(argv[5]);
+	initialise_tab(argc, argv, tab);
 	return (0);
 }

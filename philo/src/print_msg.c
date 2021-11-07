@@ -49,20 +49,17 @@ void	print_msg(t_philo *philo, int msg)
 {
 	size_t	t;
 
-	/* get time stamp in ms */
 	t = get_time() - philo->tab->t_init;
-	/* block mutex for print */
 	pthread_mutex_lock(&philo->tab->print);
-	/* print status message */
 	if (!philo->tab->dead)
 	{
 		if (msg == MSG_EAT)
 			printf("%s%5ld ms %s%3d %s%s #%d %s\n", DGRAY, t,
-				MGN, philo->id, get_clr(msg), get_msg(msg), philo->eat_cnt, NOCOL);
+				MGN, philo->id, get_clr(msg), get_msg(msg),
+				philo->eat_cnt, NOCOL);
 		else
 			printf("%s%5ld ms %s%3d %s%s%s\n", DGRAY, t,
 				MGN, philo->id, get_clr(msg), get_msg(msg), NOCOL);
 	}
-	/* unlock mutex */
 	pthread_mutex_unlock(&philo->tab->print);
 }

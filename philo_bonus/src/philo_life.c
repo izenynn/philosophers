@@ -6,7 +6,7 @@
 /*   By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 17:27:20 by dpoveda-          #+#    #+#             */
-/*   Updated: 2021/11/08 17:36:42 by dpoveda-         ###   ########.fr       */
+/*   Updated: 2021/11/09 00:13:43 by dpoveda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	*check_dead(void *arg)
 			print_msg(philo, MSG_RIP);
 			sem_wait(tab->print);
 			tab->dead = 1;
-			exit (1);
+			exit (DEAD_EXIT);
 		}
 		sem_post(tab->check);
 		if (tab->dead)
@@ -88,5 +88,5 @@ void	*philo_life(void *arg)
 		print_msg(philo, MSG_THK);
 	}
 	pthread_join(philo->check_dead, NULL);
-	exit (0);
+	exit (ALIVE_EXIT);
 }

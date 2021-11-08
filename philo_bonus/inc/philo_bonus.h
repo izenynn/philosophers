@@ -6,7 +6,7 @@
 /*   By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 10:06:52 by dpoveda-          #+#    #+#             */
-/*   Updated: 2021/11/08 17:28:01 by dpoveda-         ###   ########.fr       */
+/*   Updated: 2021/11/09 00:13:05 by dpoveda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@
 # define DGRAY "\033[1;90m"
 # define BLU "\033[1;34m"
 # define MGN "\033[1;35m"
+
+# define ALIVE_EXIT 0
+# define DEAD_EXIT 1
 
 /* message type enum */
 enum e_msg {

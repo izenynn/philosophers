@@ -6,7 +6,7 @@
 /*   By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 00:42:06 by dpoveda-          #+#    #+#             */
-/*   Updated: 2021/11/08 00:42:07 by dpoveda-         ###   ########.fr       */
+/*   Updated: 2021/11/09 00:14:14 by dpoveda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	exit_philo(t_table *tab)
 	while (++i < tab->n_philos)
 	{
 		waitpid(-1, &status, 0);
-		if (WEXITSTATUS(status) == 1)
+		if (WEXITSTATUS(status) == DEAD_EXIT)
 		{
 			i = -1;
 			while (++i < tab->n_philos)

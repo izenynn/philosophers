@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 10:06:52 by dpoveda-          #+#    #+#             */
-/*   Updated: 2021/11/04 10:06:53 by dpoveda-         ###   ########.fr       */
+/*   Updated: 2021/11/08 17:28:01 by dpoveda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <semaphore.h>
+# include <sys/types.h>
 # include <sys/time.h>
 
 # define NOCOL "\033[0m"
@@ -49,6 +50,7 @@ typedef struct s_philo
 	struct s_philo	*r_philo;
 	struct s_philo	*l_philo;
 	struct s_table	*tab;
+	pid_t			pidj
 }	t_philo;
 
 /* philo table struct */

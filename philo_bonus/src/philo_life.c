@@ -6,7 +6,7 @@
 /*   By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 17:27:20 by dpoveda-          #+#    #+#             */
-/*   Updated: 2021/11/08 14:50:07 by dpoveda-         ###   ########.fr       */
+/*   Updated: 2021/11/08 17:36:42 by dpoveda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ void	*philo_life(void *arg)
 
 	philo = (t_philo *)arg;
 	tab = philo->tab;
+	//
+	philo->last_eat = tab->t_init;
+	//
 	if (philo->id % 2 == 0)
 		usleep(100);
 	while (!tab->dead && !tab->eaten_all)

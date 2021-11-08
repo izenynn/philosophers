@@ -40,7 +40,7 @@ static char	*get_msg(int msg)
 	if (msg == MSG_THK)
 		return ("(7.7) is thinking");
 	if (msg == MSG_RIP)
-		return ("(x.x) R.I.P.");
+		return ("(x.x) died");
 	return ("Error: not valid msg id");
 }
 

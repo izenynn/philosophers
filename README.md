@@ -4,7 +4,7 @@
 
 42 Cursus - philosophers: this project is a training to multi-threads/multi-process programming.
 
-## Approach
+## The philosophers problem
 
 The classic dining philosopher problem.
 
@@ -21,6 +21,8 @@ Philosophers do not speak with each other.
 Philosophers do not know when another philospher is about to die.
 
 And of course, philosophers should avoid dying.
+
+## Solutions
 
 [philo](https://github.com/izenynn/philosophers/tree/main/philo): multi threads and mutex.
 

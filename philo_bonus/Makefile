@@ -6,7 +6,7 @@
 #    By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 09:51:43 by dpoveda-          #+#    #+#              #
-#    Updated: 2021/11/04 09:51:44 by dpoveda-         ###   ########.fr        #
+#    Updated: 2021/11/08 08:27:27 by dpoveda-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,13 +41,14 @@ MAKE = make
 CC = gcc
 
 CFLAGS += -Wall -Wextra -Werror
-#CFLAGS += -pthread
 
 # **************************************************************************** #
 #                                    FLAGS                                     #
 # **************************************************************************** #
 
 CFLAGS += -I ./inc
+
+CCFLAGS += -pthread
 
 # **************************************************************************** #
 #                                    PATHS                                     #
@@ -61,7 +62,8 @@ INC_PATH = inc
 #                                   SOURCES                                    #
 # **************************************************************************** #
 
-SRC_FILES =	main.c
+SRC_FILES =	main.c			handle_args.c			utils.c			\
+			print_msg.c		philo_life.c			philo_utils.c
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_FILES))
 
@@ -80,16 +82,20 @@ all: $(NAME)
 
 # name
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS)
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS) $(CCFLAGS)
 
-# debug
+# sanitize
 ifeq ($(UNAME_S),Linux)
-debug: CFLAGS += -pedantic -fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize=bounds -fsanitize=null -g3
+sanitize: CFLAGS += -pedantic -fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize=bounds -fsanitize=null -g3
 endif
 ifeq ($(UNAME_S),Darwin)
-debug: CFLAGS += -pedantic -fsanitize=address -g3
+sanitize: CFLAGS += -pedantic -fsanitize=address -g3
 endif
-debug: $(NAME)
+sanitize: $(NAME)
+
+# threads
+threads: CFLAGS += -fsanitize=thread -g3
+threads: $(NAME)
 
 # objs
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_PATH)

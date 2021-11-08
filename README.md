@@ -4,6 +4,10 @@
 
 42 Cursus - philosophers: this project is a training to multi-threads/multi-process programming.
 
+- Status: wip
+- Result: n/a
+- Observations: (null)
+
 ## The philosophers problem
 
 The classic dining philosopher problem.

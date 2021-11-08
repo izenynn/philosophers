@@ -95,5 +95,5 @@ void	*philo_life(void *arg)
 		print_msg(philo, MSG_THK);
 	}
 	pthread_join(philo->check_dead, NULL);
-	return (NULL);
+	exit (EXIT_SUCCESS);
 }

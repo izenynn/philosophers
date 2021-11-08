@@ -28,9 +28,6 @@ static void	*check_dead(void *arg)
 			print_msg(philo, MSG_RIP);
 			sem_wait(tab->print);
 			tab->dead = 1;
-			//
-			printf("p: %d, st: %d\n", philo->id, tab->dead);
-			//
 			exit (1);
 		}
 		sem_post(tab->check);
@@ -71,6 +68,7 @@ static void	philo_eat(t_philo *philo)
 	/* sem post */
 	sem_post(philo->tab->check);
 	hypnos(tab, tab->t_eat);
+	/* sem post */
 	sem_post(philo->tab->forks);
 	sem_post(philo->tab->forks);
 }
@@ -99,10 +97,5 @@ void	*philo_life(void *arg)
 		print_msg(philo, MSG_THK);
 	}
 	pthread_join(philo->check_dead, NULL);
-	//
-	printf("p: %d, st: %d\n", philo->id, tab->dead);
-	//
-	if (tab->dead)
-		exit (1);
 	exit (0);
 }

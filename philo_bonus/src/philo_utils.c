@@ -22,7 +22,7 @@ void	exit_philo(t_table *tab)
 	while (++i < tab->n_philos)
 	{
 		waitpid(-1, &status, 0);
-		if (status == 1)
+		if (WEXITSTATUS(status) == 1)
 		{
 			i = -1;
 			while (++i < tab->n_philos)

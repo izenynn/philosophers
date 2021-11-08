@@ -6,7 +6,7 @@
 #    By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 09:51:43 by dpoveda-          #+#    #+#              #
-#    Updated: 2021/11/08 08:27:27 by dpoveda-         ###   ########.fr        #
+#    Updated: 2021/11/08 15:15:35 by dpoveda-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,9 +93,9 @@ sanitize: CFLAGS += -pedantic -fsanitize=address -g3
 endif
 sanitize: $(NAME)
 
-# threads
-threads: CFLAGS += -fsanitize=thread -g3
-threads: $(NAME)
+# thread
+thread: CFLAGS += -fsanitize=thread -g3
+thread: $(NAME)
 
 # objs
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_PATH)

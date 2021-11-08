@@ -6,7 +6,7 @@
 /*   By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 10:07:40 by dpoveda-          #+#    #+#             */
-/*   Updated: 2021/11/04 10:07:57 by dpoveda-         ###   ########.fr       */
+/*   Updated: 2021/11/08 15:15:06 by dpoveda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ int	main(int argc, char *argv[])
 			write(STDERR_FILENO, "Error: cannot create thread\n", 28);
 			exit(EXIT_FAILURE);
 		}
-		pthread_mutex_lock(&tab.check);
 		tab.philos[i].last_eat = tab.t_init;
-		pthread_mutex_unlock(&tab.check);
 	}
 	check_dead(&tab);
 	exit_philo(&tab, tid);

@@ -26,8 +26,12 @@ static void	*check_dead(void *arg)
 		if (get_time() - philo->last_eat > (size_t)tab->t_die)
 		{
 			print_msg(philo, MSG_RIP);
+			sem_wait(tab->print);
 			tab->dead = 1;
-			exit (EXIT_SUCCESS);
+			//
+			printf("p: %d, st: %d\n", philo->id, tab->dead);
+			//
+			exit (1);
 		}
 		sem_post(tab->check);
 		/* if one philo is dead */
@@ -95,5 +99,10 @@ void	*philo_life(void *arg)
 		print_msg(philo, MSG_THK);
 	}
 	pthread_join(philo->check_dead, NULL);
-	exit (EXIT_SUCCESS);
+	//
+	printf("p: %d, st: %d\n", philo->id, tab->dead);
+	//
+	if (tab->dead)
+		exit (1);
+	exit (0);
 }

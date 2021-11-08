@@ -38,7 +38,7 @@ int	main(int argc, char *argv[])
 		if (pthread_create(&tid[i], NULL, &philo_life, &tab.philos[i]))
 		{
 			write(STDERR_FILENO, "Error: cannot create thread\n", 28);
-			break ;
+			exit(EXIT_FAILURE);
 		}
 		pthread_mutex_lock(&tab.check);
 		tab.philos[i].last_eat = tab.t_init;

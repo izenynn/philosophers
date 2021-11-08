@@ -24,9 +24,9 @@ And of course, philosophers should avoid dying.
 
 ## Solutions
 
-[philo](https://github.com/izenynn/philosophers/tree/main/philo): multi threads and mutex.
+[philo](https://github.com/izenynn/philosophers/tree/main/philo): philosopher with threads and mutex.
 
-[philo_bonus](https://github.com/izenynn/philosophers/tree/main/philo_bonus): multi processes and semaphores.
+[philo_bonus](https://github.com/izenynn/philosophers/tree/main/philo_bonus): philosopher with processes and semaphore.
 
 ##
 

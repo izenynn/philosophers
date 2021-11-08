@@ -35,21 +35,17 @@ int	main(int argc, char *argv[])
 	{
 		tab.philos[i].pid = fork();
 		if (tab.philos[i].pid == -1)
+		{
+			write(STDERR_FILENO, "Error: fork failed\n", 19);
 			exit(EXIT_FAILURE);
+		}
 		/* child procces */
 		if (tab.philos[i].pid == 0)
-			printf("Hello im philo n %d", tab.philos[i].id);
-			//philo_life((void *)&tab.philos[i]);
-		//
-		/*if (pthread_create(&tid[i], NULL, &philo_life, &tab.philos[i]))
-		{
-			write(STDERR_FILENO, "Error: cannot create thread\n", 28);
-			exit(EXIT_FAILURE);
-		}*/
+			philo_life((void *)&tab.philos[i]);
 		//tab.philos[i].last_eat = tab.t_init;
-		//
+		usleep(100); // ?
 	}
 	//check_dead(&tab);
-	exit_philo(&tab, tid);
+	exit_philo(&tab);
 	return (EXIT_SUCCESS);
 }

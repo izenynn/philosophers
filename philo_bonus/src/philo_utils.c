@@ -13,19 +13,30 @@
 #include <philo_bonus.h>
 
 /* on exit */
-void	exit_philo(t_table *tab, pthread_t *tid)
+void	exit_philo(t_table *tab)
 {
 	int	i;
+	int	status;
 
 	i = -1;
 	while (++i < tab->n_philos)
-		pthread_join(tid[i], NULL);
-	i = -1;
-	while (++i < tab->n_philos)
-		pthread_mutex_destroy(&tab->philos[i].fork);
-	pthread_mutex_destroy(&tab->print);
+	{
+		waitpid(-1, &status, 0);
+		if (status)
+		{
+			i = -1;
+			while (++i < tab->n_philos)
+				kill(tab->philos[i].pid, SIGKILL);
+			break ;
+		}
+	}
+	sem_close(tab->print);
+	sem_close(tab->check);
+	sem_close(tab->forks);
+	sem_unlink("/p_print");
+	sem_unlink("/p_check");
+	sem_unlink("/p_forks");
 	free(tab->philos);
-	free(tid);
 }
 
 /* get current time */

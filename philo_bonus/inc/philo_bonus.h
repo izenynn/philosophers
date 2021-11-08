@@ -18,8 +18,10 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <semaphore.h>
+# include <signal.h>
 # include <sys/types.h>
 # include <sys/time.h>
+# include <sys/wait.h>
 
 # define NOCOL "\033[0m"
 # define RED "\033[1;31m"
@@ -46,11 +48,11 @@ typedef struct s_philo
 	int				id;
 	int				eat_cnt;
 	size_t			last_eat;
-	pthread_mutex_t	fork;
 	struct s_philo	*r_philo;
 	struct s_philo	*l_philo;
 	struct s_table	*tab;
-	pid_t			pidj
+	pid_t			pid;
+	pthread_t		check_dead;
 }	t_philo;
 
 /* philo table struct */
@@ -65,8 +67,9 @@ typedef struct s_table
 	int				dead;
 	size_t			t_init;
 	t_philo			*philos;
-	pthread_mutex_t	print;
-	pthread_mutex_t	check;
+	sem_t			*print;
+	sem_t			*check;
+	sem_t			*forks;
 }	t_table;
 
 /* utils.c */
@@ -87,7 +90,7 @@ void	*philo_life(void *arg);
 void	check_dead(t_table *tab);
 
 /* philo_utils.c */
-void	exit_philo(t_table *tab, pthread_t *tid);
+void	exit_philo(t_table *tab);
 size_t	get_time(void);
 void	hypnos(t_table *tab, size_t t_slp);
 

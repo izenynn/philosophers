@@ -6,9 +6,9 @@
 
 ## Approach
 
-[philo](https://github.com/izenynn/philosophers/blob/philo): threads and mutex.
+[philo](https://github.com/izenynn/philosophers/tree/main/philo): threads and mutex.
 
-[philo_bonus](https://github.com/izenynn/philosophers/blob/philo_bonus): processes and semaphores.
+[philo_bonus](https://github.com/izenynn/philosophers/tree/main/philo_bonus): processes and semaphores.
 
 ##
 

@@ -50,7 +50,7 @@ void	print_msg(t_philo *philo, int msg)
 	size_t	t;
 
 	t = get_time() - philo->tab->t_init;
-	pthread_mutex_lock(&philo->tab->print);
+	sem_wait(philo->tab->print);
 	if (!philo->tab->dead && !philo->tab->eaten_all)
 	{
 		if (msg == MSG_EAT)
@@ -61,5 +61,5 @@ void	print_msg(t_philo *philo, int msg)
 			printf("%s%6ld ms %s%3d %s%s%s\n", DGRAY, t,
 				MGN, philo->id, get_clr(msg), get_msg(msg), NOCOL);
 	}
-	pthread_mutex_unlock(&philo->tab->print);
+	sem_post(philo->tab->print);
 }

@@ -13,33 +13,31 @@
 #include <philo_bonus.h>
 
 /* check for dead */
-void	check_dead(t_table *tab)
+static void	*check_dead(void *arg)
 {
-	int	i;
+	t_philo	*philo;
+	t_table	*tab;
 
-	while (!tab->eaten_all)
+	philo = (t_philo *)arg;
+	tab = philo->tab;
+	while (1)
 	{
-		i = -1;
-		while (!tab->dead && ++i < tab->n_philos)
+		sem_wait(tab->check);
+		if (get_time() - philo->last_eat > (size_t)tab->t_die)
 		{
-			pthread_mutex_lock(&tab->check);
-			if (get_time() - tab->philos[i].last_eat > (size_t)tab->t_die)
-			{
-				print_msg(&tab->philos[i], MSG_RIP);
-				tab->dead = 1;
-			}
-			pthread_mutex_unlock(&tab->check);
-			usleep(100);
+			print_msg(philo, MSG_RIP);
+			tab->dead = 1;
+			exit (EXIT_SUCCESS);
 		}
+		sem_post(tab->check);
+		/* if one philo is dead */
 		if (tab->dead)
 			break ;
-		i = 0;
-		while (tab->n_eat != -1 && i < tab->n_philos
-			&& tab->philos[i].eat_cnt >= tab->n_eat)
-			i++;
-		if (i == tab->n_philos)
-			tab->eaten_all = 1;
+		/* if philo has eaten all */
+		if (tab->n_eat != -1 && philo->eat_cnt >= tab->n_eat)
+			break ;
 	}
+	return (NULL);
 }
 
 /* take forks and eat */
@@ -48,26 +46,29 @@ static void	philo_eat(t_philo *philo)
 	t_table	*tab;
 
 	tab = philo->tab;
-	pthread_mutex_lock(&philo->fork);
+	/* sem wait */
+	sem_wait(philo->tab->forks);
 	print_msg(philo, MSG_FORK);
 	if (philo->tab->n_philos == 1)
 	{
 		hypnos(tab, tab->t_die);
 		print_msg(philo, MSG_RIP);
-		pthread_mutex_unlock(&philo->fork);
 		tab->dead = 1;
 		return ;
 	}
-	pthread_mutex_lock(&philo->r_philo->fork);
+	/* sem wait */
+	sem_wait(philo->tab->forks);
 	print_msg(philo, MSG_FORK);
-	pthread_mutex_lock(&tab->check);
+	/* lock check */
+	sem_wait(philo->tab->check);
 	philo->eat_cnt++;
 	print_msg(philo, MSG_EAT);
 	philo->last_eat = get_time();
-	pthread_mutex_unlock(&tab->check);
+	/* sem post */
+	sem_post(philo->tab->check);
 	hypnos(tab, tab->t_eat);
-	pthread_mutex_unlock(&philo->fork);
-	pthread_mutex_unlock(&philo->r_philo->fork);
+	sem_post(philo->tab->forks);
+	sem_post(philo->tab->forks);
 }
 
 /* philosophers life cicle */
@@ -78,11 +79,12 @@ void	*philo_life(void *arg)
 
 	philo = (t_philo *)arg;
 	tab = philo->tab;
-	//
+	/* set last eat time */
 	philo->last_eat = tab->t_init;
-	//
+	/* create another thread for dead check */
+	pthread_create(&philo->check_dead, NULL, check_dead, (void *)philo);
 	if (philo->id % 2 == 0)
-		usleep(100);
+		usleep(1000);
 	while (!tab->dead && !tab->eaten_all)
 	{
 		philo_eat(philo);
@@ -90,5 +92,6 @@ void	*philo_life(void *arg)
 		hypnos(tab, tab->t_slp);
 		print_msg(philo, MSG_THK);
 	}
+	pthread_join(philo->check_dead, NULL);
 	return (NULL);
 }

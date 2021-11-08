@@ -94,10 +94,7 @@ static void	initialise_tab(t_table *tab)
 			tab->philos[i].l_philo = &tab->philos[tab->n_philos - 1];
 		else
 			tab->philos[i].l_philo = &tab->philos[i - 1];
-		pthread_mutex_init(&tab->philos[i].fork, NULL);
 	}
-	pthread_mutex_init(&tab->print, NULL);
-	pthread_mutex_init(&tab->check, NULL);
 }
 
 /* handle check, parse and initialise tab */
@@ -113,5 +110,17 @@ int	handle_args(int argc, char *argv[], t_table *tab)
 	if (argc == 6)
 		tab->n_eat = ft_atoi(argv[5]);
 	initialise_tab(tab);
+	/* initialise semaphore */
+	sem_unlink("/p_print");
+	sem_unlink("/p_check");
+	sem_unlink("/p_forks");
+	tab->print = sem_open("/p_print", O_CREAT, 0644, 1);
+	tab->check = sem_open("/p_check", O_CREAT, 0644, 1);
+	tab->forks = sem_open("/p_forks", O_CREAT, 0644, tab->n_philos);
+	if (tab->print == SEM_FAILED || tab->check == SEM_FAILED || tab->forks == SEM_FAILED)
+	{
+		write(STDERR_FILENO, "Error: sem_open failed\n", 23);
+		return (1);
+	}
 	return (0);
 }

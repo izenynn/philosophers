@@ -19,6 +19,7 @@
 # include <pthread.h>
 # include <semaphore.h>
 # include <signal.h>
+# include <fcntl.h>
 # include <sys/types.h>
 # include <sys/time.h>
 # include <sys/wait.h>
@@ -87,7 +88,6 @@ void	print_msg(t_philo *philo, int msg);
 
 /* philo_life.c */
 void	*philo_life(void *arg);
-void	check_dead(t_table *tab);
 
 /* philo_utils.c */
 void	exit_philo(t_table *tab);

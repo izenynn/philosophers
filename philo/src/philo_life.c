@@ -6,7 +6,7 @@
 /*   By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 17:27:20 by dpoveda-          #+#    #+#             */
-/*   Updated: 2021/11/04 17:27:21 by dpoveda-         ###   ########.fr       */
+/*   Updated: 2021/11/08 14:50:20 by dpoveda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ static void	philo_eat(t_philo *philo)
 	}
 	pthread_mutex_lock(&philo->r_philo->fork);
 	print_msg(philo, MSG_FORK);
+	pthread_mutex_lock(&tab->check);
 	philo->eat_cnt++;
 	print_msg(philo, MSG_EAT);
-	pthread_mutex_lock(&tab->check);
 	philo->last_eat = get_time();
 	pthread_mutex_unlock(&tab->check);
 	hypnos(tab, tab->t_eat);

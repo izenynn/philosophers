@@ -39,13 +39,9 @@ int	main(int argc, char *argv[])
 			write(STDERR_FILENO, "Error: fork failed\n", 19);
 			exit(EXIT_FAILURE);
 		}
-		/* child procces */
 		if (tab.philos[i].pid == 0)
 			philo_life((void *)&tab.philos[i]);
-		//tab.philos[i].last_eat = tab.t_init;
-		usleep(100); // ?
 	}
-	//check_dead(&tab);
 	exit_philo(&tab);
 	return (EXIT_SUCCESS);
 }

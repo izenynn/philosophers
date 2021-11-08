@@ -31,10 +31,8 @@ static void	*check_dead(void *arg)
 			exit (1);
 		}
 		sem_post(tab->check);
-		/* if one philo is dead */
 		if (tab->dead)
 			break ;
-		/* if philo has eaten all */
 		if (tab->n_eat != -1 && philo->eat_cnt >= tab->n_eat)
 			break ;
 	}
@@ -47,7 +45,6 @@ static void	philo_eat(t_philo *philo)
 	t_table	*tab;
 
 	tab = philo->tab;
-	/* sem wait */
 	sem_wait(philo->tab->forks);
 	print_msg(philo, MSG_FORK);
 	if (philo->tab->n_philos == 1)
@@ -57,18 +54,14 @@ static void	philo_eat(t_philo *philo)
 		tab->dead = 1;
 		return ;
 	}
-	/* sem wait */
 	sem_wait(philo->tab->forks);
 	print_msg(philo, MSG_FORK);
-	/* lock check */
 	sem_wait(philo->tab->check);
 	philo->eat_cnt++;
 	print_msg(philo, MSG_EAT);
 	philo->last_eat = get_time();
-	/* sem post */
 	sem_post(philo->tab->check);
 	hypnos(tab, tab->t_eat);
-	/* sem post */
 	sem_post(philo->tab->forks);
 	sem_post(philo->tab->forks);
 }
@@ -81,9 +74,7 @@ void	*philo_life(void *arg)
 
 	philo = (t_philo *)arg;
 	tab = philo->tab;
-	/* set last eat time */
 	philo->last_eat = tab->t_init;
-	/* create another thread for dead check */
 	pthread_create(&philo->check_dead, NULL, check_dead, (void *)philo);
 	if (philo->id % 2 == 0)
 		usleep(1000);

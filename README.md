@@ -28,6 +28,26 @@ And of course, philosophers should avoid dying.
 
 [philo_bonus](https://github.com/izenynn/philosophers/tree/main/philo_bonus): philosopher with processes and semaphore.
 
+## How to use
+
+Clone the repo
+
+```sh
+git clone https://github.com/izenynn/libft.git
+```
+
+Usage
+
+```sh
+./philo [N PHILOS] [DIE TIME] [EAT TIME] [SLEEP TIME] (OPT)[PHILO EAT N TIMES]
+```
+
+Example
+
+```sh
+./philo 4 800 200 200
+```
+
 ##
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c.svg)](https://forthebadge.com)

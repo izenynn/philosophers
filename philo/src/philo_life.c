@@ -60,12 +60,12 @@ static void	philo_eat(t_philo *philo)
 	}
 	pthread_mutex_lock(&philo->r_philo->fork);
 	print_msg(philo, MSG_FORK);
+	philo->eat_cnt++;
 	print_msg(philo, MSG_EAT);
 	pthread_mutex_lock(&tab->check);
 	philo->last_eat = get_time();
 	pthread_mutex_unlock(&tab->check);
 	hypnos(tab, tab->t_eat);
-	philo->eat_cnt++;
 	pthread_mutex_unlock(&philo->fork);
 	pthread_mutex_unlock(&philo->r_philo->fork);
 }
@@ -80,11 +80,9 @@ void	*philo_life(void *arg)
 	tab = philo->tab;
 	if (philo->id % 2 == 0)
 		usleep(100);
-	while (!tab->dead)
+	while (!tab->dead && !tab->eaten_all)
 	{
 		philo_eat(philo);
-		if (tab->eaten_all)
-			break ;
 		print_msg(philo, MSG_SLP);
 		hypnos(tab, tab->t_slp);
 		print_msg(philo, MSG_THK);

@@ -32,7 +32,7 @@ static char	*get_clr(int msg)
 static char	*get_msg(int msg)
 {
 	if (msg == MSG_FORK)
-		return ("(-.-) has taken a fork");
+		return ("(-3-) has taken a fork");
 	if (msg == MSG_EAT)
 		return ("(^o^) is eating");
 	if (msg == MSG_SLP)
@@ -51,14 +51,14 @@ void	print_msg(t_philo *philo, int msg)
 
 	t = get_time() - philo->tab->t_init;
 	pthread_mutex_lock(&philo->tab->print);
-	if (!philo->tab->dead)
+	if (!philo->tab->dead && !philo->tab->eaten_all)
 	{
 		if (msg == MSG_EAT)
-			printf("%s%5ld ms %s%3d %s%s #%d %s\n", DGRAY, t,
+			printf("%s%6ld ms %s%3d %s%s #%d %s\n", DGRAY, t,
 				MGN, philo->id, get_clr(msg), get_msg(msg),
 				philo->eat_cnt, NOCOL);
 		else
-			printf("%s%5ld ms %s%3d %s%s%s\n", DGRAY, t,
+			printf("%s%6ld ms %s%3d %s%s%s\n", DGRAY, t,
 				MGN, philo->id, get_clr(msg), get_msg(msg), NOCOL);
 	}
 	pthread_mutex_unlock(&philo->tab->print);

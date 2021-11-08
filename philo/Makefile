@@ -6,7 +6,7 @@
 #    By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 09:51:43 by dpoveda-          #+#    #+#              #
-#    Updated: 2021/11/04 09:51:44 by dpoveda-         ###   ########.fr        #
+#    Updated: 2021/11/08 08:27:27 by dpoveda-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,13 +41,14 @@ MAKE = make
 CC = gcc
 
 CFLAGS += -Wall -Wextra -Werror
-CFLAGS += -pthread
 
 # **************************************************************************** #
 #                                    FLAGS                                     #
 # **************************************************************************** #
 
 CFLAGS += -I ./inc
+
+CCFLAGS += -pthread
 
 # **************************************************************************** #
 #                                    PATHS                                     #
@@ -81,7 +82,7 @@ all: $(NAME)
 
 # name
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS)
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS) $(CCFLAGS)
 
 # sanitize
 ifeq ($(UNAME_S),Linux)

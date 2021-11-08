@@ -6,7 +6,7 @@
 /*   By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 11:01:40 by dpoveda-          #+#    #+#             */
-/*   Updated: 2021/11/04 11:01:41 by dpoveda-         ###   ########.fr       */
+/*   Updated: 2021/11/08 08:24:03 by dpoveda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	check_args(int argc, char *argv[])
 }
 
 /* initialise tab */
-static void	initialise_tab(int argc, char *argv[], t_table *tab)
+static void	initialise_tab(t_table *tab)
 {
 	int	i;
 
@@ -112,6 +112,6 @@ int	handle_args(int argc, char *argv[], t_table *tab)
 	tab->n_eat = -1;
 	if (argc == 6)
 		tab->n_eat = ft_atoi(argv[5]);
-	initialise_tab(argc, argv, tab);
+	initialise_tab(tab);
 	return (0);
 }

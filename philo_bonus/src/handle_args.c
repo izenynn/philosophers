@@ -110,12 +110,12 @@ int	handle_args(int argc, char *argv[], t_table *tab)
 	if (argc == 6)
 		tab->n_eat = ft_atoi(argv[5]);
 	initialise_tab(tab);
-	sem_unlink("/p_print");
-	sem_unlink("/p_check");
-	sem_unlink("/p_forks");
-	tab->print = sem_open("/p_print", O_CREAT, 0644, 1);
-	tab->check = sem_open("/p_check", O_CREAT, 0644, 1);
-	tab->forks = sem_open("/p_forks", O_CREAT, 0644, tab->n_philos);
+	sem_unlink("/sem_print");
+	sem_unlink("/sem_check");
+	sem_unlink("/sem_forks");
+	tab->print = sem_open("/sem_print", O_CREAT, 0644, 1);
+	tab->check = sem_open("/sem_check", O_CREAT, 0644, 1);
+	tab->forks = sem_open("/sem_forks", O_CREAT, 0644, tab->n_philos);
 	if (tab->print == SEM_FAILED || tab->check == SEM_FAILED
 		|| tab->forks == SEM_FAILED)
 	{

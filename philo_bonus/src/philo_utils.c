@@ -33,9 +33,9 @@ void	exit_philo(t_table *tab)
 	sem_close(tab->print);
 	sem_close(tab->check);
 	sem_close(tab->forks);
-	sem_unlink("/p_print");
-	sem_unlink("/p_check");
-	sem_unlink("/p_forks");
+	sem_unlink("/sem_print");
+	sem_unlink("/sem_check");
+	sem_unlink("/sem_forks");
 	free(tab->philos);
 }
 

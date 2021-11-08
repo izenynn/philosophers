@@ -85,9 +85,11 @@ void	*philo_life(void *arg)
 	pthread_create(&philo->check_dead, NULL, check_dead, (void *)philo);
 	if (philo->id % 2 == 0)
 		usleep(1000);
-	while (!tab->dead && !tab->eaten_all)
+	while (!tab->dead)
 	{
 		philo_eat(philo);
+		if (tab->n_eat != -1 && philo->eat_cnt >= tab->n_eat)
+			break ;
 		print_msg(philo, MSG_SLP);
 		hypnos(tab, tab->t_slp);
 		print_msg(philo, MSG_THK);

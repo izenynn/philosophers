@@ -4,7 +4,7 @@
 
 42 Cursus - philosophers: this project is a training to multi-threads/multi-process programming.
 
-- Status: wip
+- Status: pending evaluation
 - Result: n/a
 - Observations: (null)
 

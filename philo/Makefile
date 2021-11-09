@@ -6,7 +6,7 @@
 #    By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 09:51:43 by dpoveda-          #+#    #+#              #
-#    Updated: 2021/11/08 15:15:58 by dpoveda-         ###   ########.fr        #
+#    Updated: 2021/11/09 23:03:54 by dpoveda-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_FILES))
 #                                    RULES                                     #
 # **************************************************************************** #
 
-.PHONY: all clean fclean re norm
+.PHONY: all clean fclean re
 
 # all
 all: $(NAME)
@@ -115,12 +115,3 @@ fclean: clean
 
 # re
 re: fclean all
-
-# norminette
-norm:
-	@printf "\n${GRN}##########${YEL} NORMINETTE ${GRN}##########${NOCOL}\n"
-	@printf "\n${GRN}LIBFT:${BLU}\n\n"
-	@norminette $(LFT_DIR)
-	@printf "\n${GRN}PIPEX:${BLU}\n\n"
-	@norminette $(SRC_PATH)
-	@printf "${NOCOL}"

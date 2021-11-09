@@ -6,7 +6,7 @@
 /*   By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 11:01:40 by dpoveda-          #+#    #+#             */
-/*   Updated: 2021/11/08 08:24:03 by dpoveda-         ###   ########.fr       */
+/*   Updated: 2021/11/09 10:50:18 by dpoveda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,6 @@ static int	check_is_int(char *s)
 	return (0);
 }
 
-/* check arguments */
-static int	check_args(int argc, char *argv[])
-{
-	int	i;
-
-	if (check_nbrs_valid(argc, argv))
-		return (1);
-	i = 0;
-	while (++i < argc)
-	{
-		if (check_is_int(argv[i]))
-			return (1);
-	}
-	return (0);
-}
-
 /* initialise tab */
 static void	initialise_tab(t_table *tab)
 {
@@ -97,11 +81,39 @@ static void	initialise_tab(t_table *tab)
 	}
 }
 
+/* initialise semaphores */
+static void	initialise_sem(t_table *tab)
+{
+	sem_unlink("/sem_print");
+	sem_unlink("/sem_check");
+	sem_unlink("/sem_forks");
+	tab->print = sem_open("/sem_print", O_CREAT, 0644, 1);
+	tab->check = sem_open("/sem_check", O_CREAT, 0644, 1);
+	tab->forks = sem_open("/sem_forks", O_CREAT, 0644, tab->n_philos);
+	sem_unlink("/sem_print");
+	sem_unlink("/sem_check");
+	sem_unlink("/sem_forks");
+	if (tab->print == SEM_FAILED || tab->check == SEM_FAILED
+		|| tab->forks == SEM_FAILED)
+	{
+		write(STDERR_FILENO, "Error: sem_open failed\n", 23);
+		exit(EXIT_FAILURE);
+	}
+}
+
 /* handle check, parse and initialise tab */
 int	handle_args(int argc, char *argv[], t_table *tab)
 {
-	if (check_args(argc, argv))
+	int	i;
+
+	if (check_nbrs_valid(argc, argv))
 		return (1);
+	i = 0;
+	while (++i < argc)
+	{
+		if (check_is_int(argv[i]))
+			return (1);
+	}
 	tab->n_philos = ft_atoi(argv[1]);
 	tab->t_die = ft_atoi(argv[2]);
 	tab->t_eat = ft_atoi(argv[3]);
@@ -110,17 +122,6 @@ int	handle_args(int argc, char *argv[], t_table *tab)
 	if (argc == 6)
 		tab->n_eat = ft_atoi(argv[5]);
 	initialise_tab(tab);
-	sem_unlink("/sem_print");
-	sem_unlink("/sem_check");
-	sem_unlink("/sem_forks");
-	tab->print = sem_open("/sem_print", O_CREAT, 0644, 1);
-	tab->check = sem_open("/sem_check", O_CREAT, 0644, 1);
-	tab->forks = sem_open("/sem_forks", O_CREAT, 0644, tab->n_philos);
-	if (tab->print == SEM_FAILED || tab->check == SEM_FAILED
-		|| tab->forks == SEM_FAILED)
-	{
-		write(STDERR_FILENO, "Error: sem_open failed\n", 23);
-		return (1);
-	}
+	initialise_sem(tab);
 	return (0);
 }

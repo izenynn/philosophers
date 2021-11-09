@@ -4,8 +4,8 @@
 
 42 Cursus - philosophers: this project is a training to multi-threads/multi-process programming.
 
-- Status: pending evaluation
-- Result: n/a
+- Status: finished
+- Result: 125%
 - Observations: (null)
 
 ## The philosophers problem

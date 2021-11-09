@@ -6,7 +6,7 @@
 /*   By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 00:42:06 by dpoveda-          #+#    #+#             */
-/*   Updated: 2021/11/09 00:14:14 by dpoveda-         ###   ########.fr       */
+/*   Updated: 2021/11/09 12:37:57 by dpoveda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ void	hypnos(t_table *tab, size_t t_slp)
 	{
 		if (get_time() - t >= t_slp)
 			break ;
-		usleep(10);
+		usleep(100);
 	}
 }

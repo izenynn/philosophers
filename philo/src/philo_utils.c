@@ -6,7 +6,7 @@
 /*   By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 00:42:06 by dpoveda-          #+#    #+#             */
-/*   Updated: 2021/11/08 00:42:07 by dpoveda-         ###   ########.fr       */
+/*   Updated: 2021/11/09 11:04:45 by dpoveda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	exit_philo(t_table *tab, pthread_t *tid)
 	while (++i < tab->n_philos)
 		pthread_mutex_destroy(&tab->philos[i].fork);
 	pthread_mutex_destroy(&tab->print);
+	pthread_mutex_destroy(&tab->check);
 	free(tab->philos);
 	free(tid);
 }

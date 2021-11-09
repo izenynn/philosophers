@@ -6,7 +6,7 @@
 /*   By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 17:27:20 by dpoveda-          #+#    #+#             */
-/*   Updated: 2021/11/09 11:06:43 by dpoveda-         ###   ########.fr       */
+/*   Updated: 2021/11/09 12:30:42 by dpoveda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	*check_dead(void *arg)
 		sem_post(tab->check);
 		if (tab->dead)
 			break ;
+		usleep(1000);
 		if (tab->n_eat != -1 && philo->eat_cnt >= tab->n_eat)
 			break ;
 	}

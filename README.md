@@ -54,6 +54,8 @@ Usage
 ./philo [N PHILOS] [DIE TIME] [EAT TIME] [SLEEP TIME] (OPT)[PHILO EAT N TIMES]
 ```
 
+*last argument is optional.*
+
 *`philo_bonus` takes the same arguments as `philo`.*
 
 Example

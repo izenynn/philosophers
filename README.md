@@ -40,10 +40,23 @@ Clone the repo
 git clone https://github.com/izenynn/libft.git
 ```
 
+Go to `philo` or `philo_bonus` folder and run `make`
+
+```sh
+cd ./philo && make
+```
+```sh
+cd ./philo_bonus && make
+```
+
 Usage
 
 ```sh
 ./philo [N PHILOS] [DIE TIME] [EAT TIME] [SLEEP TIME] (OPT)[PHILO EAT N TIMES]
+```
+
+```sh
+./philo_bonus [N PHILOS] [DIE TIME] [EAT TIME] [SLEEP TIME] (OPT)[PHILO EAT N TIMES]
 ```
 
 Example

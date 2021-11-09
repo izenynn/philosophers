@@ -34,13 +34,12 @@ And of course, philosophers should avoid dying.
 
 ## How to use
 
-### Clone the repo
+Clone the repo
 
 ```sh
 git clone https://github.com/izenynn/libft.git
 ```
-
-### Go to `philo` or `philo_bonus` folder and run `make`
+Go to `philo` or `philo_bonus` folder and run `make`
 
 ```sh
 cd ./philo && make
@@ -49,15 +48,15 @@ cd ./philo && make
 cd ./philo_bonus && make
 ```
 
-### Usage
+Usage
 
 ```sh
 ./philo [N PHILOS] [DIE TIME] [EAT TIME] [SLEEP TIME] (OPT)[PHILO EAT N TIMES]
 ```
 
-`philo_bonus` takes the same arguments as `philo`.
+*`philo_bonus` takes the same arguments as `philo`.*
 
-### Example
+Example
 
 ```sh
 ./philo 4 800 200 200

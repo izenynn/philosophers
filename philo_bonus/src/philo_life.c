@@ -6,13 +6,13 @@
 /*   By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 17:27:20 by dpoveda-          #+#    #+#             */
-/*   Updated: 2021/11/09 00:13:43 by dpoveda-         ###   ########.fr       */
+/*   Updated: 2021/11/09 11:06:43 by dpoveda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo_bonus.h>
 
-/* check for dead */
+/* check for dead and if all meals eaten */
 static void	*check_dead(void *arg)
 {
 	t_philo	*philo;

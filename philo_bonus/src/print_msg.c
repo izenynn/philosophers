@@ -6,7 +6,7 @@
 /*   By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 13:27:48 by dpoveda-          #+#    #+#             */
-/*   Updated: 2021/11/04 13:27:55 by dpoveda-         ###   ########.fr       */
+/*   Updated: 2021/11/09 11:54:23 by dpoveda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,12 @@ void	print_msg(t_philo *philo, int msg)
 	sem_wait(philo->tab->print);
 	if (!philo->tab->dead && !philo->tab->eaten_all)
 	{
+		printf(DGRAY"%6ld ms", t);
+		printf(MGN" %3d ", philo->id);
+		printf("%s%s", get_clr(msg), get_msg(msg));
 		if (msg == MSG_EAT)
-			printf("%s%6ld ms %s%3d %s%s #%d %s\n", DGRAY, t,
-				MGN, philo->id, get_clr(msg), get_msg(msg),
-				philo->eat_cnt, NOCOL);
-		else
-			printf("%s%6ld ms %s%3d %s%s%s\n", DGRAY, t,
-				MGN, philo->id, get_clr(msg), get_msg(msg), NOCOL);
+			printf(" #%d", philo->eat_cnt);
+		printf("\n");
 	}
 	sem_post(philo->tab->print);
 }

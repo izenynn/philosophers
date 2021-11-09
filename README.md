@@ -62,6 +62,10 @@ Example
 ./philo 4 800 200 200
 ```
 
+```sh
+./philo_bonus 10 410 200 200 7
+```
+
 ##
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c.svg)](https://forthebadge.com)

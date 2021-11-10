@@ -28,9 +28,9 @@ And of course, philosophers should avoid dying.
 
 ## Solutions
 
-[philo](https://github.com/izenynn/philosophers/tree/main/philo): philosopher with threads and mutex.
+[philo](https://github.com/izenynn/philosophers/tree/main/philo): philosophers with threads and mutex.
 
-[philo_bonus](https://github.com/izenynn/philosophers/tree/main/philo_bonus): philosopher with processes and semaphore.
+[philo_bonus](https://github.com/izenynn/philosophers/tree/main/philo_bonus): philosophers with processes and semaphore.
 
 ## How to use
 
@@ -47,6 +47,8 @@ cd ./philo && make
 ```sh
 cd ./philo_bonus && make
 ```
+
+*Makefile rules: `all`, `clean`, `fclean`, `re`.*
 
 Usage
 

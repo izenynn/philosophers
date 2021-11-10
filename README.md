@@ -48,7 +48,7 @@ cd ./philo && make
 cd ./philo_bonus && make
 ```
 
-*Makefile rules: `all`, `clean`, `fclean`, `re`.*
+*(makefile rules: `all`, `clean`, `fclean`, `re`).*
 
 Usage
 

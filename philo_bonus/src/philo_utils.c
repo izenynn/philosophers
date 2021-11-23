@@ -6,7 +6,7 @@
 /*   By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 00:42:06 by dpoveda-          #+#    #+#             */
-/*   Updated: 2021/11/09 12:37:57 by dpoveda-         ###   ########.fr       */
+/*   Updated: 2021/11/24 00:26:22 by dpoveda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	exit_philo(t_table *tab)
 		{
 			i = -1;
 			while (++i < tab->n_philos)
-				kill(tab->philos[i].pid, SIGKILL);
+				kill(tab->philos[i].pid, SIGTERM);
 			break ;
 		}
 	}

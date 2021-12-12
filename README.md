@@ -30,7 +30,11 @@ And of course, philosophers should avoid dying.
 
 [philo](https://github.com/izenynn/philosophers/tree/main/philo): philosophers with threads and mutex.
 
+- One fork between each pair of philosophers.
+
 [philo_bonus](https://github.com/izenynn/philosophers/tree/main/philo_bonus): philosophers with processes and semaphore.
+
+- All the forks are in the middle of the table.
 
 ## How to use
 
